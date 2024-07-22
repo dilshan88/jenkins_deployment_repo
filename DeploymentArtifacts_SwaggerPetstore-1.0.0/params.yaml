@@ -1,37 +1,10 @@
 environments:
-    - name:
-      configs:
-          endpoints:
-              production:
-                  url:
-              sandbox:
-                  url:
-          security:
-              enabled:
-              type:
-              username:
-              password:
-          deploymentEnvironments:
-              - displayOnDevportal:
-                deploymentEnvironment:
-                deploymentVhost:
-              - displayOnDevportal:
-                deploymentEnvironment:  
-                deploymentVhost:
-          certs:
-              - hostName:
-                alias:
-                path:
-              - hostName:
-                alias:
-                path:
-          mutualSslCerts:
-              - tierName:
-                alias:
-                path:
-              - tierName:
-                alias:
-                path:
-          policies:
-              - 
-              -  
+  - name: dev
+    configs:
+      endpoints:
+          production:
+              url: 'https://petstore.swagger.io/v2/'
+      deploymentEnvironments:
+          - displayOnDevportal: true
+            deploymentEnvironment: Default
+            deploymentVhost : localhost
