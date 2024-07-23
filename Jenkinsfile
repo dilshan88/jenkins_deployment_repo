@@ -30,7 +30,7 @@ node {
         # login to the dev environment
         apictl login dev -u admin -p admin -k
         # import the artifact
-        message=$(apictl import api -f $name --params $paramPath -e dev --update -k)
+        message=$(apictl import api -f $name $paramPath -e dev --update -k)
         if [ "$message" = "Successfully imported API." ]; then
             echo "Successfully imported API."
         else
