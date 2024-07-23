@@ -21,22 +21,9 @@ node {
             
         sh '''#!/bin/bash
 
-        # derive param content name 
-        fileName=$(echo $name | sed 's/\\(.*\\).zip/\\1 /')
-        deploymentName=$(echo $fileName | sed 's/\\(.*\\)_/\\1-/')
-        paramPath="DeploymentArtifacts_"$deploymentName
-        echo "Param path :"$paramPath
-
-        # login to the dev environment
-        apictl login dev -u admin -p admin -k
-        # import the artifact
-        message=$(apictl import api -f $name $paramPath -e dev --update -k)
-        if [ "$message" = "Successfully imported API." ]; then
-            echo "Successfully imported API."
-        else
-            echo $message
-        fi
-        rm $name
+         apictl login dev -u admin -p admin -k
+        apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/\CICD_ARTIFACTE_UPLOAD/upload/SwaggerPetstore_1.0.0.zip --environment dev --params DeploymentArtifacts_SwaggerPetstore-1.0.0 --update -k
+       
 
         '''
         
