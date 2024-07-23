@@ -17,6 +17,7 @@ pipeline {
         
     
     stage('Setup Environment for APICTL') {
+        setps{
         sh '''#!/bin/bash
         envs=$(apictl get envs --format "{{.Name}}")
         if [ -z "$envs" ]; 
@@ -31,9 +32,10 @@ pipeline {
             fi
         fi
         '''
-    }
+    }}
 
     stage('Deploy to Development Environment') {
+        setps{
             
         sh '''#!/bin/bash
 
@@ -42,7 +44,7 @@ pipeline {
        
 
         '''
-        
+        }
     }
      
 }
