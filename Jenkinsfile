@@ -1,4 +1,20 @@
-node {
+pipeline {
+
+    agent {
+        node {
+            label 'built-in'
+        }
+    }
+
+    options {
+        buildDiscarder logRotator( 
+                    daysToKeepStr: '16', 
+                    numToKeepStr: '10'
+            )
+    }
+
+    stages {
+        
     
     stage('Setup Environment for APICTL') {
         sh '''#!/bin/bash
@@ -29,4 +45,6 @@ node {
         
     }
      
+}
+
 }
