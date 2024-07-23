@@ -22,7 +22,7 @@ node {
         sh '''#!/bin/bash
 
          apictl login dev -u admin -p admin -k
-        apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/\CICD_ARTIFACTE_UPLOAD/upload/SwaggerPetstore_1.0.0.zip --environment dev --params DeploymentArtifacts_SwaggerPetstore-1.0.0 --update -k
+        apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/CICD_ARTIFACTE_UPLOAD/upload/SwaggerPetstore_1.0.0.zip --environment dev --params DeploymentArtifacts_SwaggerPetstore-1.0.0 --update -k
        
 
         '''
