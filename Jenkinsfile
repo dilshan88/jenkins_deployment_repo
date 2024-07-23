@@ -1,45 +1,53 @@
-node {
-    
-    stage('Setup Environment for APICTL') {
-        sh '''#!/bin/bash
-        envs=$(apictl get envs --format "{{.Name}}")
-        if [ -z "$envs" ]; 
-        then 
-            echo "No environment configured. Setting dev environment.."
-            apictl add env dev --apim https://${APIM_DEV_HOST}:9443  -k
-        else
-            echo "Environments :"$envs
-            if [[ $envs != *"dev"* ]]; then
-            echo "Dev environment is not configured. Setting dev environment.."
-            apictl add env dev --apim https://${APIM_DEV_HOST}:9443 -k
-            fi
-        fi
-        '''
-    }
+pipeline    {
 
-    stage('Deploy to Development Environment') {
-            
-        sh '''#!/bin/bash
+	agent   {
+		node{
+			label 'built-in'
+		}
+	}
+	environment {
+		Path = "/root/apictl:$PATH"
+	}
+	options {
+	 buildDiscarder logRotator(
+		daysToKeepStr: '16',
+		numToKeepStr: '10'
+     )
+	}
+	stages  
+    {
+	 stage('Setup Environment for APICTL'){
+		steps{
+			sh '''#!/bin/bash
+                #rm C:/ProgramData/Jenkins/.jenkins/workspace/gitconfig
+                #touch C:/ProgramData/Jenkins/.jenkins/workspace/gitconfig
+                apictl set --vcs-config-path C:/ProgramData/Jenkins/.jenkins/workspace/gitconfig
+				#apictl set --vcs-source-repo-path C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV
 
-        # derive param content name 
-        fileName=$(echo $name | sed 's/\\(.*\\).zip/\\1 /')
-        deploymentName=$(echo $fileName | sed 's/\\(.*\\)_/\\1-/')
-        paramPath="DeploymentArtifacts_"$deploymentName
-        echo "Param path :"$paramPath
+                envs=$(apictl get envs --format "{{.Name}}")
+                if [ -z "$envs" ]; 
+                then 
+                    echo "No environment configured. Setting dev environment.."
+                    apictl add env dev --apim https://localhost:9443 
+                else
+                    echo "Environments :"$envs
+                    if [[ $envs != *"dev"* ]]; then
+                    echo "Dev environment is not configured. Setting dev environment.."
+                    apictl add env dev --apim https://localhost:9443 
+                    fi
+                fi
+                '''
+		}
+	 }
+	 stage('Deploy APIs to Dev Environment'){
+		steps{
+			sh """
+			apictl login dev -u admin -p admin -k
+			apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/CICD_ARTIFACTE_UPLOAD/upload/SwaggerPetstore_1.0.0.zip --environment dev --params DeploymentArtifacts_SwaggerPetstore-1.0.0 --update -k
 
-        # login to the dev environment
-        apictl login dev -u admin -p admin -k
-        # import the artifact
-        message=$(apictl import api -f $name $paramPath -e dev --update -k)
-        if [ "$message" = "Successfully imported API." ]; then
-            echo "Successfully imported API."
-        else
-            echo $message
-        fi
-        rm $name
-
-        '''
-        
-    }
-     
+			"""
+		}
+	 }
+	
+	}
 }
