@@ -41,7 +41,7 @@ pipeline    {
 	 }
 	 stage('Deploy APIs to Dev Environment'){
 		steps{
-			sh """
+			sh '''#!/bin/bash
 			apictl login dev -u admin -p admin -k
 			search_dir=C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV/upload
 			for entry in "$search_dir"/*
@@ -57,7 +57,7 @@ pipeline    {
 					echo "$entry"
 					echo ${entry##*/}
 				done
-			"""
+			 '''
 		}
 	 }
 	
