@@ -45,19 +45,16 @@ pipeline    {
 			apictl login dev -u admin -p admin -k
 			search_dir=C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV/upload
 			for entry in "$search_dir"/*
-				do
-					fileNameWithExtension=${entry##*/}
-					fileNameWithOutExtension=${fileNameWithExtension%.*}
-					echo "fileNameWithOutExtension :"$fileNameWithOutExtension
-					echo "fileNameWithExtension :"$fileNameWithExtension
-					paramPath="DeploymentArtifacts_"$fileNameWithOutExtension
-					echo "Param path :"$paramPath
-					apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV/upload/$fileNameWithExtension --environment dev --params $paramPath --update -k
-
-					echo "$entry"
-					echo ${entry##*/}
-				done
-			 '''
+			do
+				fileNameWithExtension=${entry##*/}
+				fileNameWithOutExtension=${fileNameWithExtension%.*}
+				echo "fileNameWithOutExtension :"$fileNameWithOutExtension
+				echo "fileNameWithExtension :"$fileNameWithExtension
+				paramPath="DeploymentArtifacts_"$fileNameWithOutExtension
+				echo "Param path :"$paramPath
+				apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV/upload/$fileNameWithExtension --environment dev --params $paramPath --update -k
+			done
+		'''
 		}
 	 }
 	
