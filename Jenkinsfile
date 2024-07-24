@@ -43,8 +43,20 @@ pipeline    {
 		steps{
 			sh """
 			apictl login dev -u admin -p admin -k
-			apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/CICD_ARTIFACTE_UPLOAD/upload/SwaggerPetstore_1.0.0.zip --environment dev --params DeploymentArtifacts_SwaggerPetstore-1.0.0 --update -k
+			search_dir=C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV/upload
+			for entry in "$search_dir"/*
+				do
+					fileNameWithExtension=${entry##*/}
+					fileNameWithOutExtension=${fileNameWithExtension%.*}
+					echo "fileNameWithOutExtension :"$fileNameWithOutExtension
+					echo "fileNameWithExtension :"$fileNameWithExtension
+					paramPath="DeploymentArtifacts_"$fileNameWithOutExtension
+					echo "Param path :"$paramPath
+					apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV/upload/$fileNameWithExtension --environment dev --params $paramPath --update -k
 
+					echo "$entry"
+					echo ${entry##*/}
+				done
 			"""
 		}
 	 }
