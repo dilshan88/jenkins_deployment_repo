@@ -43,7 +43,7 @@ pipeline    {
 		steps{
 			sh '''#!/bin/bash
 			apictl login dev -u admin -p admin -k
-			search_dir=C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV/upload
+			search_dir=C:/ProgramData/Jenkins/.jenkins/workspace/CICD_ARTIFACTE_UPLOAD/upload
 			for entry in "$search_dir"/*
 			do
 				fileNameWithExtension=${entry##*/}
