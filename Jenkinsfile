@@ -51,7 +51,7 @@ pipeline    {
 				echo "fileNameWithOutExtension :"$fileNameWithOutExtension
 				echo "fileNameWithExtension :"$fileNameWithExtension
 				paramPath="DeploymentArtifacts_"$fileNameWithOutExtension
-    				paramPathFinal=$( echo $paramPath | sed 's/\(.*\)_/\1-/')
+    				paramPathFinal=$(echo $paramPath | sed 's/\(.*\)_/\1-/')
 				echo "Param path :"$paramPath
 				echo "Param path Final:"$paramPathFinal
 				apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV/upload/$fileNameWithExtension --environment dev --params $paramPathFinal --update -k
