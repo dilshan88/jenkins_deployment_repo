@@ -24,8 +24,6 @@ pipeline    {
                 apictl set --vcs-config-path C:/ProgramData/Jenkins/.jenkins/workspace/gitconfig
 				#apictl set --vcs-source-repo-path C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV
 		apictl get envs
-        	apictl add env dev --apim https://stg-apim.api.gov.to
-	 	apictl get envs
                 envs=$(apictl get envs --format "{{.Name}}")
                 if [ -z "$envs" ]; 
                 then 
