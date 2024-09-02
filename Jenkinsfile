@@ -51,7 +51,7 @@ pipeline    {
 				paramPath="DeploymentArtifacts_"$fileNameWithOutExtension
     				paramPathFinal=$(echo $paramPath | sed 's/\\(.*\\)_/\\1-/')
 	
-				apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV/upload/$fileNameWithExtension --environment dev --params $paramPathFinal --update -k
+				apictl import api -f C:/ProgramData/Jenkins/.jenkins/workspace/CICD_ARTIFACTE_UPLOAD/upload/$fileNameWithExtension --environment dev --params $paramPathFinal --update -k
 			done
 		'''
 		}
