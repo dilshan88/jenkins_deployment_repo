@@ -23,7 +23,7 @@ pipeline    {
                 #touch C:/ProgramData/Jenkins/.jenkins/workspace/gitconfig
                 apictl set --vcs-config-path C:/ProgramData/Jenkins/.jenkins/workspace/gitconfig
 				#apictl set --vcs-source-repo-path C:/ProgramData/Jenkins/.jenkins/workspace/CICD-PIPELINE-DEV
-
+		apictl get envs
                 envs=$(apictl get envs --format "{{.Name}}")
                 if [ -z "$envs" ]; 
                 then 
