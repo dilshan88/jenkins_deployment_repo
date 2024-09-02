@@ -42,7 +42,7 @@ pipeline    {
 	 stage('Deploy APIs to Dev Environment'){
 		steps{
 			sh '''#!/bin/bash
-			apictl login dev -u admin -p admin -k
+			apictl login dev -u admin -p i9FvTZm1zpL7Y -k
 			search_dir=C:/ProgramData/Jenkins/.jenkins/workspace/CICD_ARTIFACTE_UPLOAD/upload
 			for entry in "$search_dir"/*
 			do
