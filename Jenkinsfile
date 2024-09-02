@@ -28,12 +28,12 @@ pipeline    {
                 if [ -z "$envs" ]; 
                 then 
                     echo "No environment configured. Setting dev environment.."
-                    apictl add env dev --apim https://localhost:9443 
+                    apictl add env dev --apim https://stg-apim.api.gov.to
                 else
                     echo "Environments :"$envs
                     if [[ $envs != *"dev"* ]]; then
                     echo "Dev environment is not configured. Setting dev environment.."
-                    apictl add env dev --apim https://localhost:9443 
+                    apictl add env dev --apim https://stg-apim.api.gov.to
                     fi
                 fi
                 '''

@@ -1,0 +1,12 @@
+environments:
+  - name: dev
+    configs:
+      endpoints:
+          production:
+              url: 'http://www.dneonline.com/calculator.asmx'
+          sandbox:
+              url: 'http://www.dneonline.com/calculator.asmx'
+      deploymentEnvironments:
+          - displayOnDevportal: true
+            deploymentEnvironment: Default
+            deploymentVhost : localhost
