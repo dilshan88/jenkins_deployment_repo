@@ -44,6 +44,7 @@ pipeline    {
 			sh '''#!/bin/bash
 			apictl login dev -u admin -p i9FvTZm1zpL7Y -k
 			search_dir=C:/ProgramData/Jenkins/.jenkins/workspace/CICD_ARTIFACTE_UPLOAD/upload
+   			rm C:/ProgramData/Jenkins/.jenkins/workspace/CICD_ARTIFACTE_UPLOAD/upload/Birth-Notification_v1.0.zip
 			for entry in "$search_dir"/*
 			do
                    		echo "entry :"$entry
