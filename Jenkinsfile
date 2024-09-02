@@ -46,6 +46,7 @@ pipeline    {
 			search_dir=C:/ProgramData/Jenkins/.jenkins/workspace/CICD_ARTIFACTE_UPLOAD/upload
 			for entry in "$search_dir"/*
 			do
+   				echo entry
 				fileNameWithExtension=${entry##*/}
 				fileNameWithOutExtension=${fileNameWithExtension%.*}
 				paramPath="DeploymentArtifacts_"$fileNameWithOutExtension
